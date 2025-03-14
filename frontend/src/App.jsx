@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router";
+import HomePage from "./pages/Home/Home";
 
 function App() {
-  return (
-    <>
-      <h1>Hello</h1>
-    </>
-  );
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      Component: HomePage,
+    },
+  ]);
+
+  return <RouterProvider router={router}></RouterProvider>;
 }
 
 export default App;
