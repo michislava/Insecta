@@ -16,7 +16,7 @@ enum Rarity {
   MYTHIC
 }
 
-enum Class {
+enum AnimalClass {
   INSECTA
   ARACHNIDA
   CHILOPODA
@@ -25,7 +25,8 @@ enum Class {
 
 model Card {
   id String @id @default(uuid()) @db.Uuid
-  location String
+  latitude Decimal
+  longitude Decimal
   pictureUrl String
   rarity Rarity
   obtainmentDate DateTime
@@ -39,7 +40,7 @@ model Animal {
   id String @id @default(uuid()) @db.Uuid
   name String
   description String
-  class Class
+  animalClass AnimalClass
   cards Card[]
 }
 
