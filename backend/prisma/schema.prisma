@@ -26,11 +26,12 @@ enum Class {
 model Card {
   id String @id @default(uuid()) @db.Uuid
   location String
+  pictureUrl String
   rarity Rarity
   obtainmentDate DateTime
-  animalId String
+  animalId String @db.Uuid
   animal Animal @relation(fields: [animalId], references: [id])
-  ownerId String
+  ownerId String @db.Uuid
   owner User @relation(fields: [ownerId], references: [id])
 }
 
@@ -46,6 +47,8 @@ model User {
   id String @id @default(uuid()) @db.Uuid
   name String
   email String
+  bio String?
+  pictureUrl String?
   passwordHash String
   cards Card[]
   isDeleted DateTime?
