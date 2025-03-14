@@ -45,8 +45,8 @@ model Animal {
 
 model User {
   id String @id @default(uuid()) @db.Uuid
-  name String
-  email String
+  name String @unique
+  email String @unique
   bio String?
   pictureUrl String?
   passwordHash String
