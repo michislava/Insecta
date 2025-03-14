@@ -7,4 +7,50 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Rarity {
+  COMMON
+  UNCOMMON
+  RARE
+  EPIC
+  LEGENDARY
+  MYTHIC
+}
 
+enum AnimalClass {
+  INSECTA
+  ARACHNIDA
+  CHILOPODA
+  DIPLOPODA
+}
+
+model Card {
+  id String @id @default(uuid()) @db.Uuid
+  latitude Decimal
+  longitude Decimal
+  pictureUrl String
+  rarity Rarity
+  obtainmentDate DateTime
+  animalId String @db.Uuid
+  animal Animal @relation(fields: [animalId], references: [id])
+  ownerId String @db.Uuid
+  owner User @relation(fields: [ownerId], references: [id])
+}
+
+model Animal {
+  id String @id @default(uuid()) @db.Uuid
+  name String
+  description String
+  animalClass AnimalClass
+  cards Card[]
+}
+
+model User {
+  id String @id @default(uuid()) @db.Uuid
+  name String @unique
+  email String @unique
+  bio String?
+  pictureUrl String?
+  passwordHash String
+  cards Card[]
+  isDeleted DateTime?
+}
