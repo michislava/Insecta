@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/Home/Home";
+import Deck from "./pages/Deck/Deck";
 import LoginPage from "./pages/Login/Login";
 
 function App() {
@@ -10,6 +11,10 @@ function App() {
         { path: "/", element: <HomePage /> },
         { path: "login", element: <LoginPage /> },
       ],
+    },
+    {
+      path: "/deck",
+      element: <Deck />
     },
   ]);
 
