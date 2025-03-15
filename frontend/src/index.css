@@ -6,11 +6,10 @@
   --main-bg: #034c53;
   --second-bg: #007074;
   --main-text: #f38c79;
+  --second-text: #ffc1b4;
 }
 
 body {
-  margin: 0;
   color: var(--main-text);
-  display: flex;
   background-color: var(--main-bg);
 }
