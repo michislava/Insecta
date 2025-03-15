@@ -6,12 +6,11 @@ function Modal({ id, cards, closeModal }) {
   const card = useMemo(() => cards.find((c) => c.id === id), [id, cards])
 
   return (
-    <div className='overlay'>
+    <div onClick={closeModal} className='overlay'>
       <div className='content'>
-        <p onClick={closeModal}>X</p>
-        {card.image}
-        {card.description}
-        {card.name}
+        <img src = {card.image} alt="card image" />  
+        <p>{card.name}</p>
+        <textarea name="" id="">{card.description}</textarea>
       </div>
     </div>
   )
@@ -45,11 +44,11 @@ export default function Deck() {
           <div onClick={() => setFocusedCardId(id)} className='card'>
             <img src={image} alt={name} />
             <p className='cardTitle'>{name}</p>
-            <p>{description.slice(0, 20)}</p>
+            <p>{description.slice(0, 17)}...</p>
           </div>
         ))}
       </div>
-      {focusedCardId && (
+      {focusedCardId >= 0 && (
         <Modal
           id={focusedCardId}
           cards={cards}
