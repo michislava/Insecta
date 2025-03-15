@@ -1,0 +1,22 @@
+.cardTitle {
+  font-weight: bold;
+}
+
+.card {
+  padding: 0.5rem;
+  margin: 0.5rem;
+
+  background-color: #fffce4;
+
+  img {
+    width: 9rem;
+    height: 9rem;
+
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+  p {
+    color: black;
+    margin: 0rem;
+  }
+}
