@@ -33,7 +33,9 @@ model Card {
   animalId String @db.Uuid
   animal Animal @relation(fields: [animalId], references: [id])
   ownerId String @db.Uuid
-  owner User @relation(fields: [ownerId], references: [id])
+  owner User @relation("owner", fields: [ownerId], references: [id])
+  discovererId String @db.Uuid
+  discoverer User @relation("discoverer", fields: [discovererId], references: [id])
 }
 
 model Animal {
@@ -52,6 +54,7 @@ model User {
   bio String?
   pictureUrl String?
   passwordHash String
-  cards Card[]
+  ownedCards Card[] @relation("owner")
+  discoveredCards Card[] @relation("discoverer")
   isDeleted DateTime?
 }
