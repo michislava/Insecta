@@ -4,6 +4,7 @@ import { uploadImage } from './image-logic/uploadImage';
 import dotenv from 'dotenv';
 import { checkDiscoverer } from './db-services/userService';
 import { createCard } from './db-services/cardService';
+import { AnimalDTO } from './dtos/animalDto';
 
 const app = express();
 const upload = multer({ dest: 'uploads/' });

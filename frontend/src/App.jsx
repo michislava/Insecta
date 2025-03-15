@@ -4,6 +4,7 @@ import Deck from './pages/Deck/Deck'
 import LoginPage from './pages/Login/Login'
 import RootPage from './pages/Root/Root'
 import FightPage from './pages/Fight/fight.jsx'
+import ShootPage from "./pages/Shoot/Shoot";
 
 function App() {
   const router = createBrowserRouter([
@@ -17,7 +18,11 @@ function App() {
         { path: 'fight', element: <FightPage />}
       ],
     },
-  ])
+    {
+      path: "/shoot",
+      element: <ShootPage />,
+    },
+  ]);
 
   return <RouterProvider router={router} />
 }
