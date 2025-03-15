@@ -36,6 +36,8 @@ model Card {
   owner User @relation("owner", fields: [ownerId], references: [id])
   discovererId String @db.Uuid
   discoverer User @relation("discoverer", fields: [discovererId], references: [id])
+  usersATrades Trade[] @relation("cardA")
+  usersBTrades Trade[] @relation("cardB")
 }
 
 model Animal {
@@ -56,5 +58,19 @@ model User {
   passwordHash String
   ownedCards Card[] @relation("owner")
   discoveredCards Card[] @relation("discoverer")
+  tradedACards Trade[] @relation("userA")
+  tradedBCards Trade[] @relation("userB")
   isDeleted DateTime?
+}
+
+model Trade {
+  id Int @id @default(autoincrement())
+  userAId String @db.Uuid
+  userA User @relation("userA", fields: [userAId], references: [id])
+  userBId String? @db.Uuid
+  userB User? @relation("userB", fields: [userBId], references: [id])
+  cardAId String @db.Uuid
+  cardA Card @relation("cardA", fields: [cardAId], references: [id])
+  cardBId String? @db.Uuid
+  cardB Card? @relation("cardB", fields: [cardBId], references: [id])
 }
