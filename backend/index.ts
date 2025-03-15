@@ -3,8 +3,7 @@ import multer from 'multer';
 import { uploadImage } from './image-logic/uploadImage';
 import dotenv from 'dotenv';
 import { checkDiscoverer } from './db-services/userService';
-import { createCard } from './db-services/cardService';
-import fs from 'fs';
+import fs from 'fs/promises';
 
 const app = express();
 const upload = multer({ dest: 'uploads/' });
@@ -35,7 +34,11 @@ app.post('/upload', upload.single('image'), async (req: Request, res: Response):
         return res.status(400).json({ success: false, error: "Invalid upload" });
     }
 
-    const fileBuffer = fs.readFileSync(req.body.filePath);
+    const fileBuffer = await fs.readFile(req.file.path)
+    .catch(error => {
+        return res.status(500).json({message: 'Error reading file', error: error});
+    })
+
     const base64Image = fileBuffer.toString('base64');
 
     const requestBody = {
@@ -63,7 +66,7 @@ app.post('/upload', upload.single('image'), async (req: Request, res: Response):
     }
 
     try {
-        const imageUrl = await uploadImage(req.body.filePath, userId);
+        const imageUrl = await uploadImage(req.file.path, userId);
 
         return res.json({ success: true, imageUrl });
     } catch (error) {
