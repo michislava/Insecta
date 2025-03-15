@@ -39,6 +39,7 @@ model Card {
 model Animal {
   id String @id @default(uuid()) @db.Uuid
   name String
+  latinName String
   description String
   animalClass AnimalClass
   cards Card[]
