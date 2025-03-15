@@ -1,4 +1,5 @@
 import { PrismaClient, Card } from '@prisma/client';
+import { create } from 'domain';
 
 const prisma = new PrismaClient();
 
@@ -18,10 +19,14 @@ export async function getCardById(cardId: string): Promise<Card | null> {
     })
 }
 
-export async function createCard(card: Card) {
+export async function createCard(card: Card): Promise<String | undefined> {
     await prisma.card.create({
         data: card
     })
+
+    const createdCard = await prisma.card.findUnique({ where: card });
+
+    return createdCard?.id;
 }
 
 export async function updateCardOwner(ownerId: string, cardId: string) {

@@ -1,4 +1,5 @@
 import { User, PrismaClient } from '@prisma/client';
+import { getAnimalById } from './animalService';
 
 const prisma = new PrismaClient();
 
@@ -28,7 +29,9 @@ export async function checkDiscoverer(userId: string, latinName: string): Promis
         return null;
 
     for (let i = 0; i < user.discoveredCards.length; i++) {
-        if (user.discoveredCards[i].latinName == latinName) {
+        const animal = await getAnimalById(user.discoveredCards[i].animalId);
+
+        if (animal?.latinName == latinName) {
             return true;
         }
     }
