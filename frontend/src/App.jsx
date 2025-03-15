@@ -4,7 +4,7 @@ import Deck from './pages/Deck/Deck'
 import LoginPage from './pages/Login/Login'
 import ShootPage from './pages/Shoot/Shoot'
 import RootPage from './pages/Root/Root'
-import SelectCardModal from './pages/SelectCardModal/SelectCardModal'
+import FightPage from './pages/Fight/fight.jsx'
 
 function App() {
   const router = createBrowserRouter([
@@ -15,6 +15,7 @@ function App() {
         { path: '/', element: <HomePage /> },
         { path: 'login', element: <LoginPage /> },
         { path: 'deck', element: <Deck /> },
+        { path: 'fight', element: <FightPage />}
       ],
     },
     {
