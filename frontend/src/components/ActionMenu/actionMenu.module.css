@@ -1,0 +1,55 @@
+.photoBtn {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  z-index: 1;
+  transform: translateX(-50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photoBtn i {
+  font-size: 60px;
+  color: var(--second-bg);
+}
+
+.section {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  height: 100px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.section div {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.section i {
+  font-size: 30px;
+}
+
+.link {
+  color: var(--second-bg);
+}
+
+.activeLink {
+  color: #002829;
+}
+
+@media screen and (min-width: 700px) {
+  .photoBtn,
+  .section {
+    display: none;
+  }
+}
