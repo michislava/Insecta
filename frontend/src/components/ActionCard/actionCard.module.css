@@ -1,0 +1,21 @@
+.actionCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+  background-color: var(--second-bg);
+  color: whitesmoke;
+  width: 200px;
+  height: 100px;
+  overflow-y: visible;
+  margin-top: 50px;
+  border-radius: 12px;
+}
+
+.actionCard img {
+  height: 120px;
+}
+
+.actionCard p {
+  font-size: 24px;
+}
