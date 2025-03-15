@@ -34,14 +34,8 @@ export async function createCard(cardPartial: CardPartial): Promise<String | und
         obtainmentDate: new Date()
     };
 
-    await prisma.card.create({
+    const createdCard = await prisma.card.create({
         data: card
-    });
-
-    const createdCard = await prisma.card.findUnique({
-        where: {
-            id: card.id
-        }
     });
 
     return createdCard?.id;

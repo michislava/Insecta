@@ -3,8 +3,9 @@ import { getAnimalById } from './animalService';
 
 const prisma = new PrismaClient();
 
-export async function createUser(user: User) {
-    await prisma.user.create({ data: user })
+
+export async function createUser(user: Omit<User,'id'>) {
+    return await prisma.user.create({ data: user })
 }
 
 export async function getUserById(userId: string): Promise<User | null> {
