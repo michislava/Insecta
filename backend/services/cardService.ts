@@ -1,5 +1,4 @@
 import { Card, PrismaClient } from "@prisma/client";
-import { AssertPredicate } from "assert";
 
 const prisma = new PrismaClient();
 
@@ -22,5 +21,16 @@ async function getCardById(cardId: string): Promise<Card | null> {
 async function createCard(card: Card) {
     await prisma.card.create({
         data: card
+    })
+}
+
+async function updateCardOwner(ownerId: string, cardId: string) {
+    await prisma.card.update({
+        where: {
+            id: cardId
+        },
+        data: {
+            ownerId: ownerId
+        }
     })
 }
