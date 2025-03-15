@@ -1,8 +1,8 @@
-import { Card, PrismaClient } from "@prisma/client";
+import { PrismaClient, Card } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-async function getAllCardsForUser(userId: string): Promise<Card[]> {
+export async function getAllCardsForUser(userId: string): Promise<Card[]> {
     return await prisma.card.findMany({
         where: {
             id: userId
@@ -10,7 +10,7 @@ async function getAllCardsForUser(userId: string): Promise<Card[]> {
     })
 }
 
-async function getCardById(cardId: string): Promise<Card | null> {
+export async function getCardById(cardId: string): Promise<Card | null> {
     return await prisma.card.findUnique({
         where: {
             id: cardId
@@ -18,13 +18,13 @@ async function getCardById(cardId: string): Promise<Card | null> {
     })
 }
 
-async function createCard(card: Card) {
+export async function createCard(card: Card) {
     await prisma.card.create({
         data: card
     })
 }
 
-async function updateCardOwner(ownerId: string, cardId: string) {
+export async function updateCardOwner(ownerId: string, cardId: string) {
     await prisma.card.update({
         where: {
             id: cardId
