@@ -4,9 +4,22 @@ import { uploadImage } from './image-logic/uploadImage';
 import dotenv from 'dotenv';
 import { checkDiscoverer } from './db-services/userService';
 import { createCard } from './db-services/cardService';
+import fs from 'fs';
 
 const app = express();
 const upload = multer({ dest: 'uploads/' });
+
+interface AnimalDTO {
+    result: {
+        classification: {
+            suggestions: [
+                {
+                    name: string
+                }
+            ]
+        }
+    }
+}
 
 dotenv.config();
 
@@ -21,17 +34,21 @@ app.post('/upload', upload.single('image'), async (req: Request, res: Response):
     if (!req.file?.path) {
         return res.status(400).json({ success: false, error: "Invalid upload" });
     }
-    const filePath = req.file.path;
 
-    const formData = new FormData();
-    formData.append('image', req.file.path);
+    const fileBuffer = fs.readFileSync(req.body.filePath);
+    const base64Image = fileBuffer.toString('base64');
 
-    const response = await fetch(config.INSECT_API_HOST!, {
+    const requestBody = {
+        images: [base64Image],
+        similar_images: true
+    };
+
+    const response = await fetch(`${config.INSECT_API_HOST!}/api/v1/identification?details=url,description,image`, {
         method: 'POST',
         headers: {
             'Api-Key': config.INSECT_API_KEY!,
         },
-        body: formData
+        body: JSON.stringify(requestBody)
     }).catch(() => {
         return res.status(500).json({ success: false, error: "Internal server error" });
     });
@@ -46,12 +63,7 @@ app.post('/upload', upload.single('image'), async (req: Request, res: Response):
     }
 
     try {
-        const imageUrl = await uploadImage(filePath, userId);
-
-        var card;
-
-        // TODO: Handle card object creation
-        // var cardId = createCard(card);
+        const imageUrl = await uploadImage(req.body.filePath, userId);
 
         return res.json({ success: true, imageUrl });
     } catch (error) {
