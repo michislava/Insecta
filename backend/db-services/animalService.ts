@@ -9,3 +9,11 @@ export async function getAnimalById(animalId: string): Promise<Animal | null> {
         }
     })
 }
+
+export async function getAnimalByLatinName(latinName: string): Promise<Animal | null> {
+    return await prisma.animal.findFirst({
+        where: {
+            latinName: latinName
+        }
+    });
+}
