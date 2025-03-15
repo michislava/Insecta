@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: end;
   background-color: var(--second-bg);
+  color: whitesmoke;
   width: 200px;
   height: 100px;
   overflow-y: visible;

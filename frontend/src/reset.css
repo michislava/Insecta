@@ -27,6 +27,11 @@ svg {
   max-width: 100%;
 }
 
+a {
+  all: unset;
+  cursor: pointer;
+}
+
 /* 6. Inherit fonts for form controls */
 input,
 button,

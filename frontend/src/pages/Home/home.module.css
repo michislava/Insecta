@@ -1,10 +1,9 @@
 body {
   background-image: linear-gradient(to bottom, black, var(--main-bg));
-  height: 100vh;
 }
 
 .header {
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: column-reverse;
   align-items: center;

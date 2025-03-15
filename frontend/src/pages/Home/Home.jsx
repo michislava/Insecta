@@ -6,6 +6,7 @@ import ActionCard from "../../components/ActionCard/ActionCard";
 import classes from "./home.module.css";
 
 import Aurora from "../../blocks/Backgrounds/Aurora/Aurora";
+import ActionMenu from "../../components/ActionMenu/ActionMenu";
 
 export default function HomePage() {
   return (
@@ -16,6 +17,7 @@ export default function HomePage() {
         amplitude={1.0}
         speed={0.5}
       />
+      <ActionMenu />
       <header className={classes.header}>
         <div className={classes.heroText}>
           <h1>Insecta</h1>
