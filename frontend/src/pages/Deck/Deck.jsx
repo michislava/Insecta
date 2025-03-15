@@ -38,7 +38,7 @@ export default function Deck() {
   }, [])
   return (
     <div>
-      <h1 className='title'>Your collection 🐛🐛🐛</h1>
+      <h1 className='title'>Your collection</h1>
       <div className='cardList'>
         {(cards || []).map(({ name, image, description, id }) => (
           <div onClick={() => setFocusedCardId(id)} className='card'>
