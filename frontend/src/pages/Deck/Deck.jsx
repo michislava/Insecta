@@ -1,4 +1,5 @@
-import './style.css'
+import Card from '../../components/Card/Card'
+import classes from './deck.module.css'
 
 import { useEffect, useState, useMemo } from 'react'
 
@@ -6,11 +7,13 @@ function Modal({ id, cards, closeModal }) {
   const card = useMemo(() => cards.find((c) => c.id === id), [id, cards])
 
   return (
-    <div onClick={closeModal} className='overlay'>
-      <div className='content'>
-        <img src = {card.image} alt="card image" />  
+    <div onClick={closeModal} className={classes.overlay}>
+      <div className={classes.content}>
+        <img src={card.image} alt='card image' />
         <p>{card.name}</p>
-        <textarea name="" id="">{card.description}</textarea>
+        <textarea name='' id=''>
+          {card.description}
+        </textarea>
       </div>
     </div>
   )
@@ -30,22 +33,24 @@ export default function Deck() {
               description,
               image,
               id,
-            })),
-          ),
-        ),
+            }))
+          )
+        )
       )
       .catch(console.error)
   }, [])
   return (
     <div>
-      <h1 className='title'>Your collection</h1>
-      <div className='cardList'>
+      <h1 className={classes.title}>Your collection</h1>
+      <div className={classes.cardList}>
         {(cards || []).map(({ name, image, description, id }) => (
-          <div onClick={() => setFocusedCardId(id)} className='card'>
-            <img src={image} alt={name} />
-            <p className='cardTitle'>{name}</p>
-            <p>{description.slice(0, 17)}...</p>
-          </div>
+          <Card
+            image={image}
+            name={name}
+            id={id}
+            description={description}
+            setFocusedCardId={setFocusedCardId}
+          />
         ))}
       </div>
       {focusedCardId >= 0 && (
