@@ -8,6 +8,18 @@ import { createCard } from './db-services/cardService';
 const app = express();
 const upload = multer({ dest: 'uploads/' });
 
+interface AnimalDTO {
+    result: {
+        classification: {
+            suggestions: [
+                {
+                    name: string
+                }
+            ]
+        }
+    }
+}
+
 dotenv.config();
 
 const config = {
