@@ -4,14 +4,14 @@ import { uploadImage } from './image-logic/uploadImage';
 import dotenv from 'dotenv';
 import { checkDiscoverer } from './db-services/userService';
 import { createCard, getAllCardsForUser } from './db-services/cardService';
-
-dotenv.config();
 import fs from 'fs/promises';
 import { Rarity } from '@prisma/client';
 import { getAnimalByLatinName } from './db-services/animalService';
 import { CardPartial } from './db-services/cardService'
 import { Decimal } from '@prisma/client/runtime/library';
+import axios from 'axios';
 
+dotenv.config();
 const app = express();
 const upload = multer({ dest: 'uploads/' });
 
@@ -329,7 +329,8 @@ app.get('/battle-deck/:userId', tryCatchRoute.bind(null, async (req: any, res: a
     return res.json({ cards })
 }))
 
-app.post('/upload', upload.single('image'), tryCatchRoute.bind(null,async (req: Request, res: Response): Promise<any> => {
+
+app.post('/upload', upload.single('image'), async (req: Request, res: Response): Promise<any> => {
     const userId = req.body.userId;
 
     if (!req.file?.path) {
@@ -338,54 +339,48 @@ app.post('/upload', upload.single('image'), tryCatchRoute.bind(null,async (req: 
 
     const fileBuffer = await fs.readFile(req.file.path)
         .catch(error => {
-            return res.status(500).json({ message: 'Error reading file', error: error });
+            return res.status(500).json({message: 'Error reading file', error: error});
         })
 
-    const base64Image = fileBuffer.toString('base64');
+    const base64Image = "data:image/jpeg;base64," + fileBuffer.toString("base64");
 
-    const requestBody = {
+    const data = JSON.stringify({
         images: [base64Image],
-        similar_images: true
-    };
-
-    const response = await fetch(`${config.INSECT_API_HOST!}/api/v1/identification?details=url,description,image`, {
-        method: 'POST',
-        headers: {
-            'Api-Key': config.INSECT_API_KEY!,
-        },
-        body: JSON.stringify(requestBody)
-    }).catch(() => {
-        return res.status(500).json({ success: false, error: "Internal server error" });
     });
 
-    const data = await response.json() as AnimalDTO;
-    const latinName = data.result.classification.suggestions[0].name;
+    const url = `${config.INSECT_API_HOST!}/api/v1/identification?details=url,description,image`
+
+    let body = {
+        method: 'post',
+        maxBodyLength: Infinity,
+        url: url,
+        headers: {
+            'Api-Key': config.INSECT_API_KEY,
+            'Content-Type': 'application/json'
+        },
+        data : data
+    };
+
+    const response = await axios.request(body)
+
+    const latinName = response.data.result.classification.suggestions[0]?.name;
+    console.log(latinName)
+
+    // if (await checkDiscoverer(userId, latinName)) {
+    //     return res.json({
+    //         'message': 'Card already discovered'
+    //     });
+    // }
 
     try {
-        const animal = await getAnimalByLatinName(latinName);
-        
-        if (!animal)
-            return res.status(500).json({ success: false, error: 'Animal not found' })
-        
-        
-        if (await checkDiscoverer(userId, latinName))
-            return res.status(500).json({ success: false, error: 'Card already discovered' });
-        
         const imageUrl = await uploadImage(req.file.path, userId);
-
-        const card = getCardPartial(animal.id, req.body.latitude, req.body.longitude, imageUrl, userId);
-        
-        const cardId = await createCard(card);
-        
-        if (!cardId) {
-            return res.status(500).json({ success: false, error: "Card wasn't created successfuly" });
-        }
-        
+        console.log({imageUrl});
         return res.json({ success: true, imageUrl });
+
     } catch (error) {
-        return res.status(500).json({ success: false, error: "Internal server error" });
+        return res.json({ success: false, error: "Internal server error" });
     }
-}));
+});
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000');
