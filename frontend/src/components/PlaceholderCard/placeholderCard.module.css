@@ -1,0 +1,14 @@
+.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  width: 150px;
+
+  p {
+    color: white;
+    z-index: 1;
+    font-size: 24px;
+  }
+}
