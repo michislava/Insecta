@@ -1,3 +1,4 @@
+import ActionMenu from '../../components/ActionMenu/ActionMenu'
 import Card from '../../components/Card/Card'
 import classes from './deck.module.css'
 
@@ -40,16 +41,18 @@ export default function Deck() {
       .catch(console.error)
   }, [])
   return (
-    <div>
+    <>
+      <ActionMenu />
       <h1 className={classes.title}>Your collection</h1>
       <div className={classes.cardList}>
-        {(cards || []).map(({ name, image, description, id }) => (
+        {(cards || []).map(({ name, image, description, id }, index) => (
           <Card
+            key={index}
             image={image}
             name={name}
             id={id}
             description={description}
-            setFocusedCardId={setFocusedCardId}
+            onClick={() => setFocusedCardId(id)}
           />
         ))}
       </div>
@@ -60,6 +63,6 @@ export default function Deck() {
           closeModal={() => setFocusedCardId(undefined)}
         />
       )}
-    </div>
+    </>
   )
 }

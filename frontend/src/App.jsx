@@ -2,9 +2,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import HomePage from './pages/Home/Home'
 import Deck from './pages/Deck/Deck'
 import LoginPage from './pages/Login/Login'
+import ShootPage from './pages/Shoot/Shoot'
 import RootPage from './pages/Root/Root'
 import FightPage from './pages/Fight/fight.jsx'
-import ShootPage from "./pages/Shoot/Shoot";
 
 function App() {
   const router = createBrowserRouter([
@@ -19,10 +19,10 @@ function App() {
       ],
     },
     {
-      path: "/shoot",
+      path: '/shoot',
       element: <ShootPage />,
     },
-  ]);
+  ])
 
   return <RouterProvider router={router} />
 }
