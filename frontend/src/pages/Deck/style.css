@@ -1,5 +1,6 @@
 .title {
   color: #f38c79;
+  text-align: center;
 }
 .cardList {
   display: flex;
@@ -53,8 +54,8 @@
   z-index: 10000; /* Keeps content above the overlay */
   background-color: #fffce4;
   color: black;
-  margin: auto 3%;
-  height: 90%;
+  margin: 10% 10%;
+  height: 60%;
   display: flex;
   flex-direction: column;
 }
@@ -65,7 +66,7 @@
   width: auto;
   max-width: 60%;
   max-height: 40%;
-  margin: 30px auto;
+  margin: 20px auto 10px;
   border-radius: 10px;
 }
 
@@ -77,7 +78,7 @@
 }
 
 .content textarea {
-  margin: 30px 20px;
+  margin:10px 20px;
   height: 40%;
   border-radius: 8px;
   background-color:#635848;
