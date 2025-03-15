@@ -1,20 +1,20 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import multer from 'multer';
 import { uploadImage } from './image-logic/uploadImage';
 
 const app = express();
 const upload = multer({ dest: 'uploads/' });
 
-app.post('/upload', upload.single('image'), async (req, res) : Promise<any> => {
+app.post('/upload', upload.single('image'), async (req: Request, res: Response): Promise<any> => {
     const userId = req.body.userId;
 
-    if(!req.file?.path){
+    if (!req.file?.path) {
         return res.status(400).json({ success: false, error: "Invalid upload" });
     }
     const filePath = req.file.path;
 
     try {
-        const imageUrl = await uploadImage(filePath, userId, );
+        const imageUrl = await uploadImage(filePath, userId,);
 
         return res.json({ success: true, imageUrl });
     } catch (error) {
