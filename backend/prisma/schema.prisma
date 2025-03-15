@@ -24,13 +24,13 @@ enum AnimalClass {
 }
 
 model Card {
-  id String @id @default(uuid()) @db.Uuid
+  id String @id @db.Uuid
   latitude Decimal
   longitude Decimal
   pictureUrl String
   rarity Rarity
   obtainmentDate DateTime
-  animalId String @db.Uuid
+  animalId String @db.Uuid 
   animal Animal @relation(fields: [animalId], references: [id])
   ownerId String @db.Uuid
   owner User @relation("owner", fields: [ownerId], references: [id])
@@ -40,7 +40,7 @@ model Card {
 
 model Animal {
   id String @id @default(uuid()) @db.Uuid
-  latinName String
+  latinName String @unique
   name String
   description String
   animalClass AnimalClass

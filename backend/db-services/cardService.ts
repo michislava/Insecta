@@ -1,7 +1,9 @@
 import { PrismaClient, Card } from '@prisma/client';
-import { create } from 'domain';
+import { v4 as uuidv4 } from 'uuid';
 
 const prisma = new PrismaClient();
+
+export type CardPartial = Omit<Card, | 'id' | 'obtainmentDate'>;
 
 export async function getAllCardsForUser(userId: string): Promise<Card[]> {
     return await prisma.card.findMany({
@@ -19,12 +21,28 @@ export async function getCardById(cardId: string): Promise<Card | null> {
     })
 }
 
-export async function createCard(card: Card): Promise<String | undefined> {
+export async function createCard(cardPartial: CardPartial): Promise<String | undefined> {
+    const card: Card = {
+        id: uuidv4(),
+        latitude: cardPartial.latitude,
+        longitude: cardPartial.longitude,
+        pictureUrl: cardPartial.pictureUrl,
+        rarity: cardPartial.rarity,
+        animalId: cardPartial.animalId,
+        ownerId: cardPartial.ownerId,
+        discovererId: cardPartial.discovererId,
+        obtainmentDate: new Date()
+    };
+
     await prisma.card.create({
         data: card
-    })
+    });
 
-    const createdCard = await prisma.card.findUnique({ where: card });
+    const createdCard = await prisma.card.findUnique({
+        where: {
+            id: card.id
+        }
+    });
 
     return createdCard?.id;
 }
