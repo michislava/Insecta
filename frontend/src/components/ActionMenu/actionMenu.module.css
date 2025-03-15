@@ -46,10 +46,3 @@
 .activeLink {
   color: #002829;
 }
-
-@media screen and (min-width: 700px) {
-  .photoBtn,
-  .section {
-    display: none;
-  }
-}

@@ -1,0 +1,10 @@
+.section {
+  margin-top: 50px;
+  border-top: 5px dashed white;
+  border-bottom: 5px dashed white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  min-height: 200px;
+}
