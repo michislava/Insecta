@@ -1,4 +1,4 @@
-interface AnimalDTO {
+export interface AnimalDTO {
     result: {
         classification: {
             suggestions: [
