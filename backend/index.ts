@@ -10,6 +10,13 @@ dotenv.config();
 
 const app = express();
 const upload = multer({ dest: 'uploads/' });
+const HARDCODED_USERS = [
+    { userId:'123123123', name:'Alice', },
+    { userId:'241', name:'Bob', },
+    { userId:'12415', name:'Carl', },
+    { userId:'9871287', name:'Dave', },
+
+]
 const HARDCODED_ANIMALS = {
     bee: {
         id:'bee',
@@ -233,6 +240,21 @@ app.get('/cards/:userId', tryCatchRoute.bind(null, async (req: any, res: any): P
         return res.status(200).json({cards: HARDCODED_CARDS});
     return res.json(cards);
   }))
+
+
+// @TODO use db
+app.get('/nearby-users/:lat/:lon', tryCatchRoute.bind(null, async (req: any, res: any): Promise<any> => {
+    return res.json({users:HARDCODED_USERS})
+}))
+
+// @TODO use db
+app.get('/battle-deck/:userId', tryCatchRoute.bind(null, async (req: any, res: any): Promise<any> => {
+    const cards = []
+    while(cards.length<5){
+        cards.push(HARDCODED_CARDS[Math.floor((Math.random()%1)*HARDCODED_CARDS.length)])
+    }
+    return res.json({ cards })
+}))
 
 app.post('/upload', upload.single('image'), tryCatchRoute.bind(null,async (req: Request, res: Response): Promise<any> => {
     const userId = req.body.userId;
