@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import homeHeroImg from '../../assets/images/home-hero.png'
 import fightingImg from '../../assets/images/fighting.png'
 import cardsImg from '../../assets/images/cards.png'
@@ -31,7 +31,9 @@ export default function HomePage() {
       </header>
       <section className={classes.actionCards}>
         <ActionCard img={fightingImg} text='Fight' />
-        <ActionCard img={cardsImg} text='Trade' />
+        <Link to='/trade'>
+          <ActionCard img={cardsImg} text='Trade' />
+        </Link>
       </section>
     </>
   )

@@ -1,5 +1,5 @@
 import classes from './login.module.css'
-import logo from '../../assets/images/logo_placeholder.png'
+import logo from '../../assets/images/logo.png'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { useAuthStore } from '../../store/auth'
