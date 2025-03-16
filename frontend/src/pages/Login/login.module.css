@@ -1,63 +1,63 @@
-
 .divWithLogo {
-    height: 30%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+  height: 30%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .divWithForm {
-    height: 70%;
-    display: flex;
-    flex-direction: column;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
 }
 
 .logo {
-    width: 40%;
+  width: 40%;
 }
 
 .content {
-    max-width: 500px;
-    height: 100vh;
-    width: 100vw;
-    padding: 5% 3%;
-    margin: auto;
+  max-width: 500px;
+  height: 100vh;
+  width: 100vw;
+  padding: 5% 3%;
+  margin: auto;
 }
 
 .projectName {
-    font-size: 300%;
-    color: rgb(0, 120, 97);
+  font-size: 300%;
+  color: rgb(0, 120, 97);
 }
 
 .orParagraph {
-    text-align: center;
-    font-size: 20px;
-    color: grey;
+  text-align: center;
+  font-size: 20px;
+  color: grey;
 }
 
 .form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .input {
-    width: 80%;
-    margin: 5% 3%;
-    height: 4vh;
-    border-radius: 7px;
-    background-color: rgb(36, 33, 33);
+  width: 80%;
+  margin: 5% 3%;
+  height: 4vh;
+  border-radius: 7px;
+  background-color: rgb(36, 33, 33);
+  color: var(--second-text);
 }
 
 .googleLoginBtn {
-    width: 60%;
-    margin: 5% auto;
-    border-radius: 7px;
-    background-color: rgb(0, 60, 224);
-    border-radius: 7px;
-    opacity: 40%;
+  width: 60%;
+  margin: 5% auto;
+  border-radius: 7px;
+  background-color: rgb(0, 60, 224);
+  border-radius: 7px;
+  opacity: 40%;
 }
 
 .desktopCompatability {
-    width: 100vw;
+  width: 100vw;
 }

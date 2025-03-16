@@ -3,13 +3,16 @@ import express, { Request, Response } from 'express';
 import multer from 'multer';
 import { uploadImage } from './image-logic/uploadImage';
 import dotenv from 'dotenv';
-import {  getAllCardsForUser } from './db-services/cardService';
+import { checkDiscoverer, loginUser } from './db-services/userService';
+import { createCard, getAllCardsForUser } from './db-services/cardService';
 import fs from 'fs/promises';
 import { Rarity } from '@prisma/client';
 import { CardPartial } from './db-services/cardService'
 import { Decimal } from '@prisma/client/runtime/library';
 import axios from 'axios';
 import { createTrade, finalizeTrade, getTradeById } from './db-services/tradeService';
+import { session, sess } from './authentication';
+const bodyParser = require("body-parser");
 
 dotenv.config();
 const app = express();
@@ -36,10 +39,10 @@ const rarityMap: { [key: number]: Rarity } = {
     5: 'MYTHIC'
 };
 const HARDCODED_USERS = [
-    { userId:'123123123', name:'Alice', },
-    { userId:'241', name:'Bob', },
-    { userId:'12415', name:'Carl', },
-    { userId:'9871287', name:'Dave', },
+    { userId: '123123123', name: 'Alice', },
+    { userId: '241', name: 'Bob', },
+    { userId: '12415', name: 'Carl', },
+    { userId: '9871287', name: 'Dave', },
 
 ]
 
@@ -97,11 +100,11 @@ function getCardPartial(animalId: string, latitude: Decimal, longitude: Decimal,
 }
 
 async function tryCatchRoute(fn: any, req: any, res: any, next: any) {
-	try {
-		await fn(req, res, next)
-	} catch (err) {
-    	return res.status(500).json({ message: 'internal error' })
-	}
+    try {
+        await fn(req, res, next)
+    } catch (err) {
+        return res.status(500).json({ message: 'internal error' })
+    }
 }
 
 app.use(cors())
@@ -115,7 +118,7 @@ app.get('/cards/:userId', tryCatchRoute.bind(null, async (req: any, res: any): P
 
 // @TODO use db
 app.get('/nearby-users/:lat/:lon', tryCatchRoute.bind(null, async (req: any, res: any): Promise<any> => {
-    return res.json({users:HARDCODED_USERS})
+    return res.json({ users: HARDCODED_USERS })
 }))
 
 // @NOTE: ditched idea for now
@@ -158,7 +161,7 @@ app.post('/upload', upload.single('image'), async (req: Request, res: Response):
 
     const fileBuffer = await fs.readFile(req.file.path)
         .catch(error => {
-            return res.status(500).json({message: 'Error reading file', error: error});
+            return res.status(500).json({ message: 'Error reading file', error: error });
         })
 
     const base64Image = "data:image/jpeg;base64," + fileBuffer.toString("base64");
@@ -177,7 +180,7 @@ app.post('/upload', upload.single('image'), async (req: Request, res: Response):
             'Api-Key': config.INSECT_API_KEY,
             'Content-Type': 'application/json'
         },
-        data : data
+        data: data
     };
 
     const response = await axios.request(body)
@@ -193,13 +196,38 @@ app.post('/upload', upload.single('image'), async (req: Request, res: Response):
 
     try {
         const imageUrl = await uploadImage(req.file.path, userId);
-        console.log({imageUrl});
+        console.log({ imageUrl });
         return res.json({ success: true, imageUrl });
 
     } catch (error) {
         return res.json({ success: false, error: "Internal server error" });
     }
 });
+
+app.post("/login", async (req: Request, res: Response): Promise<any> => {
+    const { username, passHash } = req.body;
+
+    const userId: String | undefined = await loginUser(username, passHash);
+
+    if (!userId)
+        return res.status(500).json({ message: "User not found" });
+
+    req.body.session.user = { id: userId };
+
+    res.redirect("/");
+});
+
+app.get("/logout", async (req: Request, res: Response): Promise<any> => {
+    req.body.session.destroy((err: any) => {
+        if (!err)
+            return res.status(500).json({ message: "Error logging out" });
+    });
+
+    res.redirect("/");
+});
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session(sess));
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000');

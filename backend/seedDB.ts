@@ -11,7 +11,7 @@ async function main(){
         { name: 'CardiBee', email: 'cardibee@example.com', passwordHash: 'hash' }
     ] as any[];
      
-    const userIds = await Promise.all(users.map(createUser)).then(records=>records.map(record=>record.id))
+    const userIds = await Promise.all(users.map(createUserFromObj)).then(records=>records.map(record=>record.id))
       
     const animals:any[] = await Promise.all([
         prisma.animal.create({data:{ latinName: 'Apis mellifera', name: 'Honeybee', description: 'Pollinating insect', animalClass: 'INSECTA' }}),
