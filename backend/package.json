@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@types/aws-sdk": "^2.7.4",
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/multer": "^1.4.12",
     "@types/node": "^22.13.10",

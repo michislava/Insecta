@@ -8,7 +8,10 @@ export type CardPartial = Omit<Card, | 'id' | 'obtainmentDate'>;
 export async function getAllCardsForUser(userId: string): Promise<Card[]> {
     return await prisma.card.findMany({
         where: {
-            id: userId
+            ownerId: userId
+        },
+        include:{
+            animal: true
         }
     })
 }
@@ -17,6 +20,9 @@ export async function getCardById(cardId: string): Promise<Card | null> {
     return await prisma.card.findUnique({
         where: {
             id: cardId
+        },
+        include: {
+            animal:true
         }
     })
 }
@@ -34,14 +40,8 @@ export async function createCard(cardPartial: CardPartial): Promise<String | und
         obtainmentDate: new Date()
     };
 
-    await prisma.card.create({
+    const createdCard = await prisma.card.create({
         data: card
-    });
-
-    const createdCard = await prisma.card.findUnique({
-        where: {
-            id: card.id
-        }
     });
 
     return createdCard?.id;

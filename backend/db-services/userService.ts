@@ -4,6 +4,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 const prisma = new PrismaClient();
 
+
+export async function createUserFromObj(user: Omit<User,'id'>) {
+    return await prisma.user.create({ data: user })
+}
+
 export async function getUserById(userId: string): Promise<User | null> {
     return prisma.user.findUnique({
         where: {
