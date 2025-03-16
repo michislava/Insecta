@@ -13,3 +13,9 @@ body {
   color: var(--main-text);
   background-color: var(--main-bg);
 }
+
+.error {
+  color: red;
+  text-align: center;
+  text-transform: capitalize;
+}

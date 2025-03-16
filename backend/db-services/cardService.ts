@@ -11,6 +11,7 @@ export async function getAllCardsForUser(userId: string): Promise<Card[]> {
             ownerId: userId
         },
         include:{
+            owner: true,
             animal: true
         }
     })

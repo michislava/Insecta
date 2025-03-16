@@ -16,7 +16,7 @@ import bodyParser from 'body-parser';
 
 dotenv.config();
 const app = express();
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({ dest: "uploads/" });
 
 const rarityMap: { [key: number]: Rarity } = {
     0: "COMMON",
@@ -52,22 +52,22 @@ const config = {
 };
 
 function getRarity(): number {
-    const random = Math.random();
-    let rarity = 0;
+  const random = Math.random();
+  let rarity = 0;
 
-    if (random < 0.75) {
-        rarity = 1;
-    } else if (random < 0.85) {
-        rarity = 2;
-    } else if (random < 0.92) {
-        rarity = 3;
-    } else if (random < 0.97) {
-        rarity = 4;
-    } else {
-        rarity = 5;
-    }
+  if (random < 0.75) {
+    rarity = 1;
+  } else if (random < 0.85) {
+    rarity = 2;
+  } else if (random < 0.92) {
+    rarity = 3;
+  } else if (random < 0.97) {
+    rarity = 4;
+  } else {
+    rarity = 5;
+  }
 
-    return rarity;
+  return rarity;
 }
 
 function getCardPartial(
@@ -120,10 +120,10 @@ app.get(
 
 // @TODO use db
 app.get(
-    "/nearby-users/:lat/:lon",
-    tryCatchRoute.bind(null, async (req: any, res: any): Promise<any> => {
-        return res.json({ users: HARDCODED_USERS });
-    })
+  "/nearby-users/:lat/:lon",
+  tryCatchRoute.bind(null, async (req: any, res: any): Promise<any> => {
+    return res.json({ users: HARDCODED_USERS });
+  })
 );
 
 // @NOTE: ditched idea for now
@@ -235,19 +235,19 @@ app.post("/register", async (req: any, res: Response): Promise<any> => {
 })
 
 app.post("/login", async (req: any, res: Response): Promise<any> => {
-    const { username, passHash } = req.body;
+  const { username, passHash } = req.body;
 
-    const userId: String | undefined = await loginUser(username, passHash);
+  const userId: String | undefined = await loginUser(username, passHash);
 
     if (!userId) return res.status(500).json({ message: "User not found" });
 
-    req.session.userId = userId;
+  req.session.userId = userId;
 
-    res.json({ userId });
+  res.json({ userId });
 });
 
 app.get("/profile", async (req: any, res: Response): Promise<any> => {
-    const user = getUserById(req.session.userId);
+  const user = getUserById(req.session.userId);
 
     if (!user) return res.status(403).json({ message: "User not found" });
 
