@@ -11,11 +11,15 @@ export default function LoginPage() {
 
   async function handleSubmit(e) {
     e.preventDefault()
+
+    const passwordHash = hash(password)
+
     const response = await fetch(`http://localhost:3000/login`, {
       method: 'POST',
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ username, passwordHash }),
       credentials: 'include',
       headers: {
+        'Content-Type': 'application/json',
         'X-CSRFToken': getCsrfToken(),
       },
     })
