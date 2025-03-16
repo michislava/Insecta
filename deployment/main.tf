@@ -1,6 +1,8 @@
 # Create a VPC
 resource "aws_vpc" "insecta_vpc" {
   cidr_block = "10.0.0.0/16"
+  enable_dns_support   = true
+  enable_dns_hostnames = true
   tags = {
     Name = "insecta-vpc"
   }
@@ -84,11 +86,13 @@ resource "aws_security_group" "insecta_ec2_sg" {
 
 # Create an EC2 instance
 resource "aws_instance" "insecta_ec2" {
-  ami                    = "ami-0c02fb55956c7d316" # Amazon Linux 2 AMI
+  ami                    = "ami-04b4f1a9cf54c11d0"
   instance_type          = "t2.micro"
   subnet_id              = aws_subnet.insecta_public_subnet_1.id
   vpc_security_group_ids = [aws_security_group.insecta_ec2_sg.id] # Use vpc_security_group_ids instead of security_groups
   key_name               = "insecta-key-pair"
+  associate_public_ip_address = true
+
   tags = {
     Name = "insecta-ec2"
   }
@@ -102,8 +106,32 @@ resource "aws_rds_cluster" "insecta_aurora" {
   master_username    = var.master_username
   master_password    = var.master_password
   skip_final_snapshot = true
-  vpc_security_group_ids = [aws_security_group.insecta_ec2_sg.id]
+  vpc_security_group_ids = [aws_security_group.insecta_rds_sg.id]
   db_subnet_group_name = aws_db_subnet_group.insecta_db_subnet_group.name
+}
+
+# Security group for Aurora database
+resource "aws_security_group" "insecta_rds_sg" {
+  vpc_id = aws_vpc.insecta_vpc.id
+
+  ingress {
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] #
+    # security_groups = [aws_security_group.insecta_ec2_sg.id] #
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"] # Allow all outbound traffic
+  }
+
+  tags = {
+    Name = "insecta-rds-sg"
+  }
 }
 
 resource "aws_db_subnet_group" "insecta_db_subnet_group" {
