@@ -11,8 +11,32 @@ env:
   ECR_BACKEND_REPOSITORY: ${{ secrets.ECR_BACKEND_REPOSITORY }}
 
 jobs:
+  build_test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x] # Add more versions if needed, e.g., [14.x, 16.x, 18.x]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build and test
+        run: |
+          npm run build --if-present
+          npm run test
+
   build-and-push:
     runs-on: ubuntu-latest
+    needs: build_test # Ensure this job runs only if build_test succeeds
 
     steps:
       - name: Checkout code
@@ -30,15 +54,17 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Build and Push Frontend Image
+        working-directory: ./frontend # Ensure the build context is correct
         run: |
-          docker build -t $ECR_FRONTEND_REPOSITORY:latest -f frontend/Dockerfile ./frontend
+          docker build -t $ECR_FRONTEND_REPOSITORY:latest -f Dockerfile .
           docker tag $ECR_FRONTEND_REPOSITORY:latest $ECR_FRONTEND_REPOSITORY:$GITHUB_SHA
           docker push $ECR_FRONTEND_REPOSITORY:latest
           docker push $ECR_FRONTEND_REPOSITORY:$GITHUB_SHA
 
       - name: Build and Push Backend Image
+        working-directory: ./backend # Ensure the build context is correct
         run: |
-          docker build -t $ECR_BACKEND_REPOSITORY:latest -f backend/Dockerfile ./backend
+          docker build -t $ECR_BACKEND_REPOSITORY:latest -f Dockerfile .
           docker tag $ECR_BACKEND_REPOSITORY:latest $ECR_BACKEND_REPOSITORY:$GITHUB_SHA
           docker push $ECR_BACKEND_REPOSITORY:latest
           docker push $ECR_BACKEND_REPOSITORY:$GITHUB_SHA
