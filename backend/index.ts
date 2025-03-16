@@ -102,8 +102,7 @@ app.use(express.json());
 app.use(session(sess));
 
 app.get('/cards', tryCatchRoute.bind(null, async (req: any, res: any): Promise<any> => {
-    const { userId } = req.params;
-    const cards = await getAllCardsForUser(userId).catch(console.error)
+    const cards = await getAllCardsForUser(req.session.userId).catch(console.error)
     return res.json({ cards });
 }))
 
@@ -218,8 +217,8 @@ app.get("/profile", async (req: any, res: Response): Promise<any> => {
     res.json({ user });
 })
 
-app.get("/logout", async (req: Request, res: Response): Promise<any> => {
-    req.body.session.destroy((err: any) => {
+app.get("/logout", async (req: any, res: Response): Promise<any> => {
+    req.session.destroy((err: any) => {
         if (!err)
             return res.status(500).json({ message: "Error logging out" });
     });
