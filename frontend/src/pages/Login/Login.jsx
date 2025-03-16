@@ -12,7 +12,7 @@ export default function LoginPage() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-
+    
     const passHash = hash(password);
 
     const response = await fetch(`http://localhost:3000/login`, {
