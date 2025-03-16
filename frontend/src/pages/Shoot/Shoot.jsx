@@ -2,14 +2,16 @@ import { useNavigate } from 'react-router-dom'
 import { useRef, useState, useEffect, useCallback } from 'react'
 import classes from './shoot.module.css'
 
+const HARDCODED_USER_ID = '0d5c6541-e9ae-4c52-b840-45c06a41a489'
+
 function ViewCard({ card }) {
   const navigate = useNavigate()
 
   return (
     <div className={classes.successWrapper}>
-      <img src={card.image} />
-      <h1>{card.name}</h1>
-      <h4>{card.description}</h4>
+      <img src={card.pictureUrl} />
+      <h1>{card.animal.name}</h1>
+      <h4>{card.animal.description}</h4>
       <button onClick={() => navigate('/deck')}>Go to deck</button>
     </div>
   )
@@ -54,26 +56,23 @@ export default function ShootPage() {
     setStep('PICTURE')
   }, [step])
 
-  const submitToBe = useCallback(async () => {
+  const uploadImage = useCallback(async () => {
     if (step !== 'PICTURE') return
-    // @TODO use backend
+
     setIsUploading(true)
-    const fetchedCard = await new Promise((r) =>
-      setTimeout(
-        () =>
-          r({
-            image:
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyCBIX5o1Af_JDI2rn56RFiuv90AcMmJAPpg&s',
-            name: 'Ladyius buggiuos',
-            description:
-              'Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.',
-          }),
-        1000
-      )
-    ).finally()
-    setCard(fetchedCard)
+    const fetchedCard = await fetch(`http://localhost:3000/upload`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ image: photo, userId: HARDCODED_USER_ID }),
+    })
+      .then((r) => r.json())
+      .catch(console.error)
+      .finally(() => setIsUploading(true))
+    console.log(fetchedCard)
+    setCard(fetchedCard.card)
     setStep('VIEW')
-  }, [step])
+  }, [step, photo])
 
   return (
     <>
@@ -115,7 +114,7 @@ export default function ShootPage() {
               </svg>
             ) : (
               <svg
-                onClick={() => submitToBe()}
+                onClick={() => uploadImage()}
                 className={classes.confirmButton}
                 xmlns='http://www.w3.org/2000/svg'
                 viewBox='0 0 448 512'

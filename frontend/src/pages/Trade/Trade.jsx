@@ -6,8 +6,8 @@ import classes from './trade.module.css'
 import Card from '../../components/Card/Card'
 import SelectCardModal from '../SelectCardModal/SelectCardModal'
 
-const USER_A_ID = '1d38f28c-e7b1-4d04-8c16-7746921221c6' // buzz
-const USER_B_ID = 'c45a5c80-b0dd-4605-9009-679e4c00ea5e' // cardi
+const USER_A_ID = '0d5c6541-e9ae-4c52-b840-45c06a41a489' // buzz
+const USER_B_ID = '25f4cb36-1011-451a-b716-3f951b6a387b' // cardi
 
 export default function TradePage() {
   const { id } = useParams()
@@ -18,7 +18,7 @@ export default function TradePage() {
   useEffect(() => {
     if (currentUserCards) return
     // @TODO use actual current user card
-    fetch(`http://localhost:3000/cards/${USER_A_ID}`)
+    fetch(`http://localhost:3000/cards`)
       .then((r) => r.json())
       .then((r) => setCurrentUserCards(r.cards))
       .catch(console.error)

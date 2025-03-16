@@ -1,0 +1,231 @@
+{
+  "classification": {
+    "suggestions": [
+      {
+        "id": "c8c9f42bd6338f61",
+        "name": "Formica rufa",
+        "probability": 0.2952,
+        "details": {
+          "url": "https://en.wikipedia.org/wiki/Formica_rufa",
+          "description": {
+            "value": "Formica rufa, also known as the  red wood ant, southern wood ant, or horse ant, is a boreal member of the Formica rufa group of ants, and is the type species for that group, being described already by Linneaus. It is native to Eurasia, with a recorded distribution stretching from the middle of Scandinavia to the northern Iberia and Anatolia, and from Great Britain to Lake Baikal, with unconfirmed reportings of it also to the Russian Far East. There are claims that it can be found in North America, but this is not confirmed in specialised literature, and no recent publication where North American wood ants are listed mentions it as present, while records from North America are all listed as dubious or unconfirmed in a record compilation. Workers head and thorax are colored red and the abdomen brownish-black, usually with a dorsal dark patches on the head and promensonotum, although some individuals may be more uniform reddish and even have some red on the part of the gastern facing the body. In order to separate them from closely related species, specimens needs to be inspected under magnification, where difference in hairyness are among the telling characteristics, with Formica rufa being more hairy than per example Formica polyctena but less hairy than Formica lugubris. Workers are polymorphic, measuring 4.5–9 mm in length. They have large mandibles, and like many other ant species, they are able to spray formic acid from their abdomens as a defence. Formic acid was first extracted in 1671 by the English naturalist John Ray by distilling a large number of crushed ants of this species. These ants primarily eat honeydew from aphids. Some groups form large networks of connected nests with multiple queen colonies, while others have single-queen colonies.",
+            "citation": "https://en.wikipedia.org/wiki/Formica_rufa",
+            "license_name": "CC BY-SA 3.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+          },
+          "image": {
+            "value": "https://insect-id.ams3.cdn.digitaloceanspaces.com/knowledge_base/wikidata/bd8/bd885c1ee4d96446a925287fa0fc401b031bf1b1.jpg",
+            "citation": "//commons.wikimedia.org/wiki/User:Makro_Freak",
+            "license_name": "CC BY-SA 2.5",
+            "license_url": "https://creativecommons.org/licenses/by-sa/2.5/"
+          },
+          "language": "en",
+          "entity_id": "c8c9f42bd6338f61"
+        }
+      },
+      {
+        "id": "559970b421dcc4ef",
+        "name": "Oecophylla smaragdina",
+        "probability": 0.2814,
+        "details": {
+          "url": "https://en.wikipedia.org/wiki/Oecophylla_smaragdina",
+          "description": {
+            "value": "Oecophylla smaragdina (common names include Asian weaver ant, weaver ant, green ant, green tree ant, semut rangrang, semut kerangga, and orange gaster) is a species of arboreal ant found in tropical Asia and Australia. These ants form colonies with multiple nests in trees, each nest being made of leaves stitched together using the silk produced by the ant larvae: hence the name 'oecophylla' [Greek for 'leaf-house'].",
+            "citation": "https://en.wikipedia.org/wiki/Oecophylla_smaragdina",
+            "license_name": "CC BY-SA 3.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+          },
+          "image": {
+            "value": "https://insect-id.ams3.cdn.digitaloceanspaces.com/knowledge_base/wikidata/a34/a340d2fb19a51d38213c2b65518d59c2152931c5.jpg",
+            "citation": "https://en.wikipedia.org/wiki/User:Tuancao1",
+            "license_name": "CC BY-SA 3.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+          },
+          "language": "en",
+          "entity_id": "559970b421dcc4ef"
+        }
+      },
+      {
+        "id": "f4ef707159fa1810",
+        "name": "Formica sanguinea",
+        "probability": 0.1686,
+        "details": {
+          "url": "https://en.wikipedia.org/wiki/Formica_sanguinea",
+          "description": {
+            "value": "Formica sanguinea, or blood-red ant, is a species of facultative slave-maker ant in the genus Formica characterized by the ability to secrete formic acid. It ranges from Central and Northern Europe through Russia to Japan, China, the Korean Peninsula, Africa and also the United States. This species is coloured red and black with workers up to 7 mm long.A colony of F. sanguinea can live either as a free colony or as a social parasite of Formica species, most commonly Formica fusca, Formica japonica, Formica hayashi and Formica rufibarbis.",
+            "citation": "https://en.wikipedia.org/wiki/Formica_sanguinea",
+            "license_name": "CC BY-SA 3.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+          },
+          "image": {
+            "value": "https://insect-id.ams3.cdn.digitaloceanspaces.com/knowledge_base/wikidata/9f0/9f0273c7cdf9d81d95f6a6690351ae3da272586a.jpg",
+            "citation": "https://commons.wikimedia.org/wiki/File:Formica_sanguinea_2.JPG",
+            "license_name": "CC BY-SA 2.5",
+            "license_url": "https://creativecommons.org/licenses/by-sa/2.5/"
+          },
+          "language": "en",
+          "entity_id": "f4ef707159fa1810"
+        }
+      },
+      {
+        "id": "5b64e3ef25229d87",
+        "name": "Atta mexicana",
+        "probability": 0.0619,
+        "details": {
+          "url": "https://en.wikipedia.org/wiki/Atta_mexicana",
+          "description": {
+            "value": "Atta mexicana is a species of leaf-cutter ant, a New World ant of the subfamily Myrmicinae of the genus Atta. This species is from one of the two genera of advanced attines (fungus-growing ants) within the tribe Attini.",
+            "citation": "https://en.wikipedia.org/wiki/Atta_mexicana",
+            "license_name": "CC BY-SA 3.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+          },
+          "image": {
+            "value": "https://insect-id.ams3.cdn.digitaloceanspaces.com/knowledge_base/wikidata/628/628a51202acb1a43dcdb9550559e6e03bab317f1.jpg",
+            "citation": "http://www.antweb.org/bigPicture.do?name=casent0421379&number=1&shot=p",
+            "license_name": "CC BY 4.0",
+            "license_url": "https://creativecommons.org/licenses/by/4.0/"
+          },
+          "language": "en",
+          "entity_id": "5b64e3ef25229d87"
+        }
+      },
+      {
+        "id": "c0fa761daf86d24d",
+        "name": "Linepithema humile",
+        "probability": 0.0223,
+        "details": {
+          "url": "https://en.wikipedia.org/wiki/Argentine_ant",
+          "description": {
+            "value": "The Argentine ant (Linepithema humile, formerly Iridomyrmex humilis) is an ant native to northern Argentina, Uruguay, Paraguay, Bolivia and southern Brazil. This invasive species was inadvertently introduced by humans on a global scale and has become established in many Mediterranean climate areas, including South Africa, New Zealand, Japan, Easter Island, Australia, Europe, Hawaii, and the continental United States. Argentine ants are significant pests within agricultural and urban settings, and are documented to cause substantial harm to communities of native arthropods, vertebrates, and plants within their invaded range.",
+            "citation": "https://en.wikipedia.org/wiki/Argentine_ant",
+            "license_name": "CC BY-SA 3.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+          },
+          "image": {
+            "value": "https://insect-id.ams3.cdn.digitaloceanspaces.com/knowledge_base/wikidata/426/4268471d7a0ef8f403adb1b9e90427a3d4368ac8.jpg",
+            "citation": "//commons.wikimedia.org/wiki/User:Penarc",
+            "license_name": "CC BY-SA 4.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+          },
+          "language": "en",
+          "entity_id": "c0fa761daf86d24d"
+        }
+      },
+      {
+        "id": "d33d17faf776da98",
+        "name": "Formica polyctena",
+        "probability": 0.0151,
+        "details": {
+          "url": "https://en.wikipedia.org/wiki/Formica_polyctena",
+          "description": {
+            "value": "Formica polyctena is a species of European red wood ant in the genus Formica and large family Formicidae. The species was first described by Arnold Förster in 1850. The latin species name polyctena is from Greek and literally means 'many cattle', referring to the species' habit of farming aphids for honeydew food. It is found in many European countries. It is a eusocial species, that has a distinct caste system of sterile workers and a very small reproductive caste. The ants have a genetic based cue that allow them to identify which other ants are members of their nest and which are foreign individuals. When facing these types of foreign invaders the F. polyctena has a system to activate an alarm. It can release pheromones which can trigger an alarm response in other nearby ants.It is found in Austria, Belgium, Bulgaria, Czech Republic, Estonia, \nFinland, France, Germany, Hungary, Italy, Latvia, Lithuania, Luxembourg, the Netherlands, Norway, Poland, Romania, Russia, Serbia and Montenegro, Slovakia, Spain, Sweden, Switzerland, and Ukraine.",
+            "citation": "https://en.wikipedia.org/wiki/Formica_polyctena",
+            "license_name": "CC BY-SA 3.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+          },
+          "image": {
+            "value": "https://insect-id.ams3.cdn.digitaloceanspaces.com/knowledge_base/wikidata/876/87645ef1d5a60cf8a0fb3bf761af71ddd512ae77.jpg",
+            "citation": "//commons.wikimedia.org/wiki/User:AfroBrazilian",
+            "license_name": "CC BY-SA 4.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+          },
+          "language": "en",
+          "entity_id": "d33d17faf776da98"
+        }
+      },
+      {
+        "id": "21968b498a2d0a74",
+        "name": "Lasius brunneus",
+        "probability": 0.0148,
+        "details": {
+          "url": "https://en.wikipedia.org/wiki/Lasius_brunneus",
+          "description": {
+            "value": "Lasius brunneus is a species of ant in the genus Lasius. The species is widely distributed in Europe, from Sweden in the north to Anatolia in the south. In England this species is almost always found nesting in oak trees or rotting wood mainly foraging in trees but has also been found under stones and foraging on the ground. It is thought to be underrecorded but is fairly common especially in the South East.\nWorkers are easy to identify as they are bicoloured, but they can be confused with Lasius emarginatus. Nuptial flights have been recorded as early as May on warm days from early morning to early afternoon. Queens are smaller than other Lasius species, mainly a uniform dark brown colour with a flattish, slim appearance.",
+            "citation": "https://en.wikipedia.org/wiki/Lasius_brunneus",
+            "license_name": "CC BY-SA 3.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+          },
+          "image": {
+            "value": "https://insect-id.ams3.cdn.digitaloceanspaces.com/knowledge_base/wikidata/43d/43d4ed5698c9771196111c34f1d9493a4abb8572.jpg",
+            "citation": "http://www.antweb.org/bigPicture.do?name=casent0172717&number=1&shot=p",
+            "license_name": "CC BY 4.0",
+            "license_url": "https://creativecommons.org/licenses/by/4.0/"
+          },
+          "language": "en",
+          "entity_id": "21968b498a2d0a74"
+        }
+      },
+      {
+        "id": "b14b4d5ae1a6bd32",
+        "name": "Formica cinerea",
+        "probability": 0.0132,
+        "details": {
+          "url": "https://en.wikipedia.org/wiki/Formica_cinerea",
+          "description": {
+            "value": "Formica cinerea is a species of ant in the family Formicidae.",
+            "citation": "https://en.wikipedia.org/wiki/Formica_cinerea",
+            "license_name": "CC BY-SA 3.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+          },
+          "image": {
+            "value": "https://insect-id.ams3.cdn.digitaloceanspaces.com/knowledge_base/wikidata/3a1/3a1ceaed4cb6228704ffabf0f518e78dc6ff7456.jpg",
+            "citation": "//commons.wikimedia.org/wiki/User:Aiwok",
+            "license_name": "CC BY-SA 3.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+          },
+          "language": "en",
+          "entity_id": "b14b4d5ae1a6bd32"
+        }
+      },
+      {
+        "id": "e3ec7147ea873b81",
+        "name": "Myrmaplata plataleoides",
+        "probability": 0.0121,
+        "details": {
+          "url": "https://en.wikipedia.org/wiki/Myrmaplata_plataleoides",
+          "description": {
+            "value": "Myrmaplata plataleoides, also called the red weaver-ant mimicking jumper, is a jumping spider that mimics the Asian weaver ant (Oecophylla smaragdina) in morphology and behaviour. This species is found in India, Sri Lanka, China and many parts of Southeast Asia.\nUnlike the weaver ants, M. plataleoides does not bite people, and indeed seems rather timid.",
+            "citation": "https://en.wikipedia.org/wiki/Myrmaplata_plataleoides",
+            "license_name": "CC BY-SA 3.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+          },
+          "image": {
+            "value": "https://insect-id.ams3.cdn.digitaloceanspaces.com/knowledge_base/wikipedia/d42/d42a9d4ba03a8b1ffd863e9e1e66e20019ff4e32.jpg",
+            "citation": "//commons.wikimedia.org/wiki/User:Jkadavoor",
+            "license_name": "CC BY-SA 4.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+          },
+          "language": "en",
+          "entity_id": "e3ec7147ea873b81"
+        }
+      },
+      {
+        "id": "81bbfe3400a7543c",
+        "name": "Formica cunicularia",
+        "probability": 0.0118,
+        "details": {
+          "url": "https://en.wikipedia.org/wiki/Formica_cunicularia",
+          "description": {
+            "value": "Formica cunicularia is a species of ant found all over Europe. They are especially common in western Europe and southern England, but they can be found from southern Scandinavia to northern Africa and from Portugal to the Urals. In England, Donisthorpe records the species as having occurred as far north as Bewdley in Worcestershire. In Formica cunicularia, the worker is an ashy grey black color and is usually 4.0–6.5 mm long. The males are found to have a uniformly dark body and are 8.0–9.0 mm long. The queen is yellowish red to dark black and is 7.5–9.0 mm.\n\n",
+            "citation": "https://en.wikipedia.org/wiki/Formica_cunicularia",
+            "license_name": "CC BY-SA 3.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+          },
+          "image": {
+            "value": "https://insect-id.ams3.cdn.digitaloceanspaces.com/knowledge_base/wikidata/600/6006407e32148eca2d7de90f2371f9ed3563dd26.jpg",
+            "citation": "http://www.antweb.org/bigPicture.do?name=casent0173175&number=1&shot=p",
+            "license_name": "CC BY 4.0",
+            "license_url": "https://creativecommons.org/licenses/by/4.0/"
+          },
+          "language": "en",
+          "entity_id": "81bbfe3400a7543c"
+        }
+      }
+    ]
+  },
+  "is_insect": {
+    "probability": 0.9948782,
+    "threshold": 0.5,
+    "binary": true
+  }
+}

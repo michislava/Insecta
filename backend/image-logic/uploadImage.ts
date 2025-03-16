@@ -1,7 +1,9 @@
+
 import AWS from 'aws-sdk';
 import { v4 as uuidv4 } from 'uuid';
 import fs from 'fs';
 import "dotenv/config"
+import { dataUriToBuffer } from 'data-uri-to-buffer'
 
 AWS.config.update({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -11,15 +13,17 @@ AWS.config.update({
 
 const s3 = new AWS.S3();
 
-export const uploadImage = async (filePath: string, userId: string): Promise<string> => {
-    const fileContent = fs.readFileSync(filePath);
+export const uploadImage = async (base64Image: string, userId: string): Promise<string> => {
+    const {buffer, type} = dataUriToBuffer(base64Image);
+    const s3Buffer = Buffer.isBuffer(buffer) ? buffer : Buffer.from(buffer);
+
     const fileName = `images/${userId}/${Date.now()}-${uuidv4()}.jpg`;
 
     const params = {
         Bucket: 'insectopia-image-bucket',
         Key: fileName,
-        Body: fileContent,
-        ContentType: 'image/jpeg',
+        Body: s3Buffer,
+        ContentType: type
     };
 
     try {

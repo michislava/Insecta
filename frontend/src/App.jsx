@@ -17,7 +17,7 @@ function App() {
         { path: 'login', element: <LoginPage /> },
         { path: 'deck', element: <Deck /> },
         { path: 'fight', element: <FightPage /> },
-        { path: 'trade/:id?', element: <TradePage /> },
+        { path: 'trade/:id?', element: <TradePage /> }
       ],
     },
     {
