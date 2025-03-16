@@ -1,3 +1,4 @@
+import cors  from 'cors';
 import express, { Request, Response } from 'express';
 import multer from 'multer';
 import { uploadImage } from './image-logic/uploadImage';
@@ -305,6 +306,7 @@ async function tryCatchRoute(fn: any, req: any, res: any, next: any) {
 	}
 }
 
+app.use(cors())
 
 app.get('/cards/:userId', tryCatchRoute.bind(null, async (req: any, res: any): Promise<any> => {
     const { userId } = req.params;
