@@ -11,6 +11,8 @@ export async function getTradeById(tradeId: number): Promise<Trade | null> {
         include: {
             cardA: {include:{animal:true}},
             cardB: {include:{animal:true}},
+            userA: true,
+            userB: true,
         }
     })
 }

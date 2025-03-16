@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import classes from './trade.module.css'
 import Card from '../../components/Card/Card'
@@ -8,6 +8,15 @@ import SelectCardModal from '../SelectCardModal/SelectCardModal'
 
 const USER_A_ID = '0d5c6541-e9ae-4c52-b840-45c06a41a489' // buzz
 const USER_B_ID = '25f4cb36-1011-451a-b716-3f951b6a387b' // cardi
+function EmptyCard({ onClick }) {
+  return (
+    <div className={`${classes.cardOrdEmpty}`} onClick={onClick}>
+      <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'>
+        <path d='M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z' />
+      </svg>
+    </div>
+  )
+}
 
 export default function TradePage() {
   const { id } = useParams()
@@ -15,6 +24,13 @@ export default function TradePage() {
   const navigate = useNavigate()
   const [showModal, setShowModal] = useState(false)
   const [currentUserCards, setCurrentUserCards] = useState(undefined)
+  const tradeStatus = useMemo(() => {
+    if (!id) return 'Inactive'
+    if (!trade) return 'Loading...'
+    if (!id) return 'Inactive'
+    if (!trade.cardB) return 'Pending'
+    return 'Success'
+  }, [id, trade])
   useEffect(() => {
     if (currentUserCards) return
     // @TODO use actual current user card
@@ -28,7 +44,6 @@ export default function TradePage() {
     if (!id) return
     // we already know it is finalized, no need to start polling
     if (trade && trade.cardB) return
-    console.log(1)
     if (!trade)
       fetch(`http://localhost:3000/trade/${id}`)
         .then((r) => r.json())
@@ -93,8 +108,10 @@ export default function TradePage() {
   return (
     <>
       <div className={classes.page}>
-        <h1>Trade</h1>
-        <h2>Your card</h2>
+        <p className={classes.title}>Trade</p>
+        <p className={classes.status}>{tradeStatus}</p>
+        <h2>{trade?.userA?.name || 'Your card'}</h2>
+
         {trade && trade.cardA ? (
           <>
             <Card
@@ -106,13 +123,10 @@ export default function TradePage() {
           </>
         ) : (
           // @TODO use component
-          <div
-            className={`${classes.cardOrdEmpty}`}
-            onClick={() => setShowModal(true)}
-          />
+          <EmptyCard onClick={() => setShowModal(true)} />
         )}
         <hr />
-        <h2>To get</h2>
+        <h2>{trade?.userB?.name || 'To get'}</h2>
         {trade && trade.cardB ? (
           <Card
             name={trade.cardB.name}
@@ -121,10 +135,7 @@ export default function TradePage() {
             description={trade.cardB.animal.description}
           />
         ) : (
-          <div
-            className={`${classes.cardOrdEmpty}`}
-            onClick={() => setShowModal(true)}
-          />
+          <EmptyCard onClick={() => setShowModal(true)} />
         )}
       </div>
 

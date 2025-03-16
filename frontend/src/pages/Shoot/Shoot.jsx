@@ -61,10 +61,11 @@ export default function ShootPage() {
     setIsUploading(true)
     const fetchedCard = await fetch(`http://localhost:3000/upload`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ image: photo, userId: HARDCODED_USER_ID }),
+      body: JSON.stringify({ image: photo }),
     })
       .then((r) => r.json())
       .catch(console.error)

@@ -169,7 +169,8 @@ app.post(
 );
 
 app.post("/upload", async (req: any, res: any): Promise<any> => {
-  const { image, userId } = req.body; // Expecting a Base64 string
+  const { image } = req.body; 
+  const userId = req.session.userId
   const base64Image = image;
   if (!userId) return res.status(400).json({ message: "userId is required" });
   if (!image) return res.status(400).json({ message: "image is required" });

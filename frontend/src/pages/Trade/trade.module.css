@@ -13,5 +13,12 @@
     height: 35vh;
     background-color: gray;
     border-radius: 2rem;
+    padding: 6rem;
+  }
+  .title {
+    font-size: 5rem;
+  }
+  .status {
+    font-size: 2.5rem;
   }
 }
