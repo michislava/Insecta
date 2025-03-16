@@ -1,5 +1,5 @@
 import { User, Animal, PrismaClient } from '@prisma/client';
-import { createUser } from "./db-services/userService";
+import { createUser, createUserFromObj } from "./db-services/userService";
 import { createCard } from './db-services/cardService';
 
 const prisma = new PrismaClient();
