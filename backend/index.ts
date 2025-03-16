@@ -1,26 +1,19 @@
-import cors from "cors";
-import express, { Request, response, Response } from "express";
-import multer from "multer";
-import { uploadImage } from "./image-logic/uploadImage";
-import dotenv from "dotenv";
-import {
-  checkDiscoverer,
-  getUserById,
-  loginUser,
-} from "./db-services/userService";
-import { createCard, getAllCardsForUser } from "./db-services/cardService";
-import fs from "fs/promises";
-import { Rarity } from "@prisma/client";
-import { CardPartial } from "./db-services/cardService";
-import { Decimal } from "@prisma/client/runtime/library";
-import axios from "axios";
-import {
-  createTrade,
-  finalizeTrade,
-  getTradeById,
-} from "./db-services/tradeService";
-import { session, sess } from "./authentication";
-import bodyParser from "body-parser";
+import cors from 'cors';
+import express, { Request, response, Response } from 'express';
+import multer from 'multer';
+import { uploadImage } from './image-logic/uploadImage';
+import dotenv from 'dotenv';
+import { checkDiscoverer, createUser, getUserById, loginUser } from './db-services/userService';
+import { createCard, getAllCardsForUser } from './db-services/cardService';
+import fs from 'fs/promises';
+import { Rarity } from '@prisma/client';
+import { CardPartial } from './db-services/cardService'
+import { Decimal } from '@prisma/client/runtime/library';
+import axios from 'axios';
+import { createTrade, finalizeTrade, getTradeById } from './db-services/tradeService';
+import { session, sess } from './authentication';
+import bodyParser from 'body-parser';
+
 dotenv.config();
 const app = express();
 const upload = multer({ dest: "uploads/" });
@@ -227,6 +220,19 @@ app.post(
     }
   }
 );
+
+app.post("/register", async (req: any, res: Response): Promise<any> => {
+    const { username, email, passHash } = req.body;
+
+    const userId: String | undefined = await createUser(email, username, passHash);
+
+    if (!userId)
+        return res.status(500).json({ message: "User not created "});
+
+    req.session.userId = userId;
+
+    res.json({ userId });
+})
 
 app.post("/login", async (req: any, res: Response): Promise<any> => {
   const { username, passHash } = req.body;

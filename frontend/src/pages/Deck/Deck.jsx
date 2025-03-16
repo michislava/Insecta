@@ -47,13 +47,13 @@ export default function Deck() {
       <ActionMenu />
       <h1 className={classes.title}>Your collection</h1>
       <div className={classes.cardList}>
-        {(cards || []).map(({ name, image, description, id }, index) => (
+        {(cards || []).map(({ name, pictureUrl, animal, id }, index) => (
           <Card
             key={index}
-            image={image}
+            image={pictureUrl}
             name={name}
             id={id}
-            description={description}
+            description={animal.description}
             onClick={() => setFocusedCardId(id)}
           />
         ))}
