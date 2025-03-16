@@ -8,8 +8,8 @@ export async function getTradeById(tradeId: number): Promise<Trade | null> {
             id: tradeId
         },
         include: {
-            cardA: true,
-            cardB: true
+            cardA: {include:{animal:true}},
+            cardB: {include:{animal:true}},
         }
     })
 }
