@@ -14,3 +14,6 @@ Kolegite team members:
 [Dimitar Minchev](https://github.com/DimitarM45)
 [Josif Hamed](https://github.com/JIOjosBG)
 [Velislav Dolchinkov](https://github.com/Veli82)
+
+
+[Presentation](https://docs.google.com/presentation/d/1wmi0KJdEaD5OrZQH06YVH6OF5yNeksDiPZnYa-MB4Ns/edit?usp=sharing)
