@@ -7,6 +7,7 @@ import RootPage from './pages/Root/Root'
 import FightPage from './pages/Fight/fight.jsx'
 import TradePage from './pages/Trade/Trade.jsx'
 import ProfilePage from './pages/Profile/Profile.jsx'
+import RegisterPage from './pages/Register/Register.jsx'
 
 function App() {
   const router = createBrowserRouter([
@@ -16,6 +17,7 @@ function App() {
       children: [
         { path: '/', element: <HomePage /> },
         { path: 'login', element: <LoginPage /> },
+        { path: 'register', element: <RegisterPage /> },
         { path: 'deck', element: <Deck /> },
         { path: 'fight', element: <FightPage /> },
         { path: 'trade/:id?', element: <TradePage /> },
