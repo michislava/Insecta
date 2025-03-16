@@ -1,9 +1,9 @@
-import cors  from 'cors';
-import express, { Request, Response } from 'express';
+import cors from 'cors';
+import express, { Request, response, Response } from 'express';
 import multer from 'multer';
 import { uploadImage } from './image-logic/uploadImage';
 import dotenv from 'dotenv';
-import { checkDiscoverer, loginUser } from './db-services/userService';
+import { checkDiscoverer, getUserById, loginUser } from './db-services/userService';
 import { createCard, getAllCardsForUser } from './db-services/cardService';
 import fs from 'fs/promises';
 import { Rarity } from '@prisma/client';
@@ -12,23 +12,10 @@ import { Decimal } from '@prisma/client/runtime/library';
 import axios from 'axios';
 import { createTrade, finalizeTrade, getTradeById } from './db-services/tradeService';
 import { session, sess } from './authentication';
-const bodyParser = require("body-parser");
-
+import bodyParser from 'body-parser';
 dotenv.config();
 const app = express();
 const upload = multer({ dest: 'uploads/' });
-
-interface AnimalDTO {
-    result: {
-        classification: {
-            suggestions: [
-                {
-                    name: string
-                }
-            ]
-        }
-    }
-}
 
 const rarityMap: { [key: number]: Rarity } = {
     0: 'COMMON',
@@ -45,7 +32,6 @@ const HARDCODED_USERS = [
     { userId: '9871287', name: 'Dave', },
 
 ]
-
 interface AnimalDTO {
     result: {
         classification: {
@@ -107,13 +93,19 @@ async function tryCatchRoute(fn: any, req: any, res: any, next: any) {
     }
 }
 
-app.use(cors())
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true
+}));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(session(sess));
 
-app.get('/cards/:userId', tryCatchRoute.bind(null, async (req: any, res: any): Promise<any> => {
+app.get('/cards', tryCatchRoute.bind(null, async (req: any, res: any): Promise<any> => {
     const { userId } = req.params;
     const cards = await getAllCardsForUser(userId).catch(console.error)
-    return res.json({cards});
-  }))
+    return res.json({ cards });
+}))
 
 
 // @TODO use db
@@ -133,14 +125,14 @@ app.get('/nearby-users/:lat/:lon', tryCatchRoute.bind(null, async (req: any, res
 
 
 app.get('/trade/:tradeId', tryCatchRoute.bind(null, async (req: any, res: any): Promise<any> => {
-    const {tradeId} = req.params
+    const { tradeId } = req.params
     const trade = await getTradeById(parseInt(tradeId))
     return res.json({ trade })
 }))
 
 app.post('/create-trade/:userId/:cardId', tryCatchRoute.bind(null, async (req: any, res: any): Promise<any> => {
-    const {userId,cardId} = req.params
-    const trade = await createTrade(userId,cardId)
+    const { userId, cardId } = req.params
+    const trade = await createTrade(userId, cardId)
     return res.json({ trade })
 }))
 
@@ -204,7 +196,7 @@ app.post('/upload', upload.single('image'), async (req: Request, res: Response):
     }
 });
 
-app.post("/login", async (req: Request, res: Response): Promise<any> => {
+app.post("/login", async (req: any, res: Response): Promise<any> => {
     const { username, passHash } = req.body;
 
     const userId: String | undefined = await loginUser(username, passHash);
@@ -212,10 +204,19 @@ app.post("/login", async (req: Request, res: Response): Promise<any> => {
     if (!userId)
         return res.status(500).json({ message: "User not found" });
 
-    req.body.session.user = { id: userId };
+    req.session.userId = userId;
 
-    res.redirect("/");
+    res.json({ userId });
 });
+
+app.get("/profile", async (req: any, res: Response): Promise<any> => {
+    const user = getUserById(req.session.userId);
+
+    if (!user)
+        return res.status(403).json({ message: "User not found" });
+
+    res.json({ user });
+})
 
 app.get("/logout", async (req: Request, res: Response): Promise<any> => {
     req.body.session.destroy((err: any) => {
@@ -225,9 +226,6 @@ app.get("/logout", async (req: Request, res: Response): Promise<any> => {
 
     res.redirect("/");
 });
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(session(sess));
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000');

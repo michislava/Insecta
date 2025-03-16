@@ -3,6 +3,7 @@ import logo from '../../assets/images/logo_placeholder.png'
 import { useState } from 'react'
 
 import { hash } from '../../utils/auth'
+import { getCsrfToken } from '../../utils/auth'
 
 export default function LoginPage() {
   const [username, setUsername] = useState('')
@@ -11,16 +12,20 @@ export default function LoginPage() {
 
   async function handleSubmit(e) {
     e.preventDefault()
+
+    const passHash = hash(password);
+
     const response = await fetch(`http://localhost:3000/login`, {
       method: 'POST',
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ username, email, passHash }),
       credentials: 'include',
       headers: {
-        'X-CSRFToken': getCsrfToken(),
+        'Content-Type': 'application/json',
+        'X-CSRFToken': await getCsrfToken()
       },
-    })
-    const responseData = await response.json()
-    console.log(responseData)
+    });
+
+    const responseData = await response.json();
   }
 
   return (

@@ -66,7 +66,7 @@ export async function createUser(email: string, username: string, passHash: stri
 }
 
 export async function loginUser(username: string, passHash: string): Promise<String | undefined> {
-    const user = await prisma.user.findFirst({
+    const user = await prisma.user.findUnique({
         where: {
             name: username,
             passwordHash: passHash
