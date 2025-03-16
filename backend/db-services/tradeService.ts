@@ -24,6 +24,7 @@ export async function createTrade(userId:string,cardId:string): Promise<Trade | 
 }
 
 export async function finalizeTrade(tradedId:number, userId:string,cardId:string): Promise<Trade | null> {
+    // @TODO actually change owners of cards
     return await prisma.trade.update({
         where: {
             id: tradedId,
