@@ -5,17 +5,13 @@ import classes from './deck.module.css'
 
 import { useEffect, useState, useMemo } from 'react'
 
-function Modal({ id, cards, closeModal }) {
-  const card = useMemo(() => cards.find((c) => c.id === id), [id, cards])
-
+function Modal({ card, ...props }) {
   return (
-    <div onClick={closeModal} className={classes.overlay}>
+    <div {...props} className={classes.overlay}>
       <div className={classes.content}>
-        <img src={card.image} alt='card image' />
-        <p>{card.name}</p>
-        <textarea name='' id=''>
-          {card.description}
-        </textarea>
+        <img src={card.pictureUrl} alt='card image' />
+        <p>{card.animal.name}</p>
+        <textarea value={card.animal.description} />
       </div>
     </div>
   )
@@ -23,7 +19,7 @@ function Modal({ id, cards, closeModal }) {
 
 export default function Deck() {
   const [cards, setCards] = useState(undefined)
-  const [focusedCardId, setFocusedCardId] = useState(undefined)
+  const [focusedCard, setFocusedCard] = useState(undefined)
   useEffect(() => {
     async function fetchCards() {
       const response = await fetch('http://localhost:3000/cards', {
@@ -47,23 +43,19 @@ export default function Deck() {
       <ActionMenu />
       <h1 className={classes.title}>Your collection</h1>
       <div className={classes.cardList}>
-        {(cards || []).map(({ name, pictureUrl, animal, id }, index) => (
+        {(cards || []).map((card) => (
           <Card
-            key={index}
-            image={pictureUrl}
-            name={name}
-            id={id}
-            description={animal.description}
-            onClick={() => setFocusedCardId(id)}
+            key={card.id}
+            image={card.pictureUrl}
+            name={card.name}
+            id={card.id}
+            description={card.animal.description}
+            onClick={() => setFocusedCard(card)}
           />
         ))}
       </div>
-      {focusedCardId >= 0 && (
-        <Modal
-          id={focusedCardId}
-          cards={cards}
-          closeModal={() => setFocusedCardId(undefined)}
-        />
+      {focusedCard && (
+        <Modal card={focusedCard} onClick={() => setFocusedCard(undefined)} />
       )}
     </>
   )
