@@ -20,12 +20,13 @@ function App() {
         { path: 'register', element: <RegisterPage /> },
         { path: 'deck', element: <Deck /> },
         { path: 'fight', element: <FightPage /> },
-        { path: 'trade/:id?', element: <TradePage /> },
+        // { path: 'trade/:id?', element: <TradePage /> },
         { path: 'profile', element: <ProfilePage /> },
         // { path: 'shoot', element: <ShootPage /> },
       ],
     },
     { path: 'shoot', element: <ShootPage /> },
+    { path: 'trade/:id?', element: <TradePage /> },
   ])
 
   return <RouterProvider router={router} />
