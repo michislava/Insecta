@@ -3,15 +3,15 @@ import Card from '../../components/Card/Card'
 import { getCsrfToken } from '../../utils/auth'
 import classes from './deck.module.css'
 
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect, useState } from 'react'
 
 function Modal({ card, ...props }) {
   return (
     <div {...props} className={classes.overlay}>
       <div className={classes.content}>
         <img src={card.pictureUrl} alt='card image' />
-        <p>{card.animal.name}</p>
-        <textarea value={card.animal.description} />
+        <p className={classes.name}>{card.animal.name}</p>
+        <p className={classes.description}>{card.animal.description}</p>
       </div>
     </div>
   )

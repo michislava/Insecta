@@ -45,6 +45,7 @@
 }
 
 .content {
+  padding: 1rem;
   position: relative;
   z-index: 10000; /* Keeps content above the overlay */
   background-color: #fffce4;
@@ -59,15 +60,15 @@
   display: block;
   height: auto;
   width: auto;
-  max-width: 60%;
+  max-width: 100%;
   max-height: 40%;
   margin: 20px auto 10px;
   border-radius: 10px;
 }
 
-.content p {
-  text-align: center;
-  font-weight: 500;
+.name {
+  /* text-align: center; */
+  font-weight: bold;
   font-size: x-large;
   margin: 0;
 }
@@ -76,5 +77,13 @@
   margin: 10px 20px;
   height: 40%;
   border-radius: 8px;
-  background-color: #635848;
+}
+
+.description {
+  font-size: 1rem;
+  /* text-align: center; */
+  margin: 1rem;
+  /* white-space: nowrap; */
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
