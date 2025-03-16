@@ -16,8 +16,8 @@
 .confirmButton,
 .shootButton {
   position: absolute;
-  bottom: 20%;
-  left: 45%;
+  bottom: 20vh;
+  left: 45vw;
   height: 10%;
   width: 10%;
 }

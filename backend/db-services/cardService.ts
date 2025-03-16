@@ -28,7 +28,7 @@ export async function getCardById(cardId: string): Promise<Card | null> {
     })
 }
 
-export async function createCard(cardPartial: CardPartial): Promise<String | undefined> {
+export async function createCard(cardPartial: CardPartial): Promise<Card | undefined> {
     const card: Card = {
         id: uuidv4(),
         latitude: cardPartial.latitude,
@@ -42,10 +42,13 @@ export async function createCard(cardPartial: CardPartial): Promise<String | und
     };
 
     const createdCard = await prisma.card.create({
-        data: card
+        data: card,
+        include: {
+            animal:true
+        }
     });
 
-    return createdCard?.id;
+    return createdCard;
 }
 
 export async function updateCardOwner(ownerId: string, cardId: string) {

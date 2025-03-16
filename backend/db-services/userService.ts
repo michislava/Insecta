@@ -6,7 +6,10 @@ const prisma = new PrismaClient();
 
 
 export async function createUserFromObj(user: Omit<User,'id'>) {
-    return await prisma.user.create({ data: user })
+    console.log(user)
+    const u = await prisma.user.create({ data: user })
+    console.log(u)
+    return u
 }
 
 export async function getUserById(userId: string): Promise<User | null> {
