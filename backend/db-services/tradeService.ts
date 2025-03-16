@@ -1,4 +1,5 @@
 import { Trade, User, Card, PrismaClient } from "@prisma/client";
+import { updateCardOwner } from "./cardService";
 
 const prisma = new PrismaClient();
 
@@ -23,9 +24,9 @@ export async function createTrade(userId:string,cardId:string): Promise<Trade | 
     })
 }
 
-export async function finalizeTrade(tradedId:number, userId:string,cardId:string): Promise<Trade | null> {
+export async function finalizeTrade(tradedId:number, userId:string, cardId:string): Promise<Trade | null> {
     // @TODO actually change owners of cards
-    return await prisma.trade.update({
+    await prisma.trade.update({
         where: {
             id: tradedId,
         },
@@ -34,4 +35,29 @@ export async function finalizeTrade(tradedId:number, userId:string,cardId:string
             cardB:{ connect: {id:cardId}}
         },
     })
+
+    const trade: Trade | null = await prisma.trade.findUnique({
+        where: {
+            id: tradedId
+        },
+        include: {
+            userA: true,
+            userB: true,
+            cardA: true,
+            cardB: true
+        }
+    })
+
+    if (!trade || !trade.cardBId || !trade.userBId)
+        return null;
+
+    const userAId = trade.userAId;
+    const userBId = trade.userBId;
+    const cardAId = trade.cardAId;
+    const cardBId = trade.cardBId;
+    
+    updateCardOwner(userAId, cardBId);
+    updateCardOwner(userBId, cardAId);
+
+    return trade;
 }

@@ -255,7 +255,7 @@ app.get("/logout", async (req: any, res: Response): Promise<any> => {
 
 app.get("/check-session", async (req: any, res: Response): Promise<any> => {
     if (!req.session.userId)
-        res.status(404).json({ message: "Session doesn't exist "});
+        return res.status(404).json({ message: "Session doesn't exist "});
 
     res.status(200).json({ message: "Session exists"});    
 });
