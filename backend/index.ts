@@ -16,6 +16,7 @@ import { session, sess } from './authentication';
 import { uploadImage } from './image-logic/uploadImage';
 
 dotenv.config();
+
 const HARDCODED_API_DATA = {
   "classification": {
       "suggestions": [
@@ -51,6 +52,7 @@ const HARDCODED_API_DATA = {
 }
 
 const app = express();
+app.use(cors())
 app.use(bodyParser.json({ limit: '10mb' })); // Increase limit if needed
 const upload = multer({ dest: 'uploads/' });
 
@@ -151,8 +153,7 @@ app.post(
   })
 );
 
-app.post('/upload/', upload.single('image'), async (req: Request, res: Response): Promise<any> => {
-
+app.post('/upload', async (req: any, res: any): Promise<any> => {
     const { image, userId } = req.body; // Expecting a Base64 string
     const base64Image = image
     if(!userId) return res.status(400).json({message:"userId is required"})

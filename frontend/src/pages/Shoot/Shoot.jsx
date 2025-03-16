@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useRef, useState, useEffect, useCallback } from 'react'
 import classes from './shoot.module.css'
-
 const HARDCODED_USER_ID = '0d5c6541-e9ae-4c52-b840-45c06a41a489'
 
 function ViewCard({ card }) {
@@ -62,8 +61,9 @@ export default function ShootPage() {
     setIsUploading(true)
     const fetchedCard = await fetch(`http://localhost:3000/upload`, {
       method: 'POST',
-      credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({ image: photo, userId: HARDCODED_USER_ID }),
     })
       .then((r) => r.json())
