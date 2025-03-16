@@ -22,11 +22,8 @@ function App() {
         { path: 'fight', element: <FightPage /> },
         { path: 'trade/:id?', element: <TradePage /> },
         { path: 'profile', element: <ProfilePage /> },
+        { path: 'shoot', element: <ShootPage /> },
       ],
-    },
-    {
-      path: '/shoot',
-      element: <ShootPage />,
     },
   ])
 
